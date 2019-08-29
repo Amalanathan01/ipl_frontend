@@ -1,23 +1,24 @@
-import React, {Component} from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
-import './App.css';
+import './App.scss';
 
-const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>
+const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 
-const Dashboard = Loadable({
-	loader: () => import('./component/Dashboard'),
-	loading
-})
+const DashBoard = Loadable({
+  loader: () => import('./component/Dashboard'),
+  loading
+});
 
 class App extends Component {
-  render() {	
+
+  render() {
     return (
       <BrowserRouter>
-	    <Switch>
-	      <Route path="/" name="Dashboard" component = {Dashboard} />
-	    </Switch>
-	  </BrowserRouter>  
+          <Switch>
+            <Route path="/" name="Home" component={DashBoard} />
+          </Switch>
+      </BrowserRouter>
     );
   }
 }

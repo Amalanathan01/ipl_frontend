@@ -1,50 +1,37 @@
-import React from "react";
-import Sidebar from "react-sidebar";
+import React, { Component } from 'react';
+import { DropdownItem, DropdownMenu, DropdownToggle, Nav } from 'reactstrap';
+import PropTypes from 'prop-types';
+import {  AppHeaderDropdown, AppSidebarToggler } from '@coreui/react';
 
-const mql = window.matchMedia(`(min-width: 800px)`);
- 
+const propTypes = {
+  children: PropTypes.node,
+};
 
-class Header extends React.Component {
-	
-  constructor(props) {
-    super(props);
-    this.state = {
-      sidebarDocked: mql.matches,
-      sidebarOpen: false
-    };
- 
-    this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
-    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
-  }
- 
-  componentWillMount() {
-    mql.addListener(this.mediaQueryChanged);
-  }
- 
-  componentWillUnmount() {
-    this.state.mql.removeListener(this.mediaQueryChanged);
-  }
- 
-  onSetSidebarOpen(open) {
-    this.setState({ sidebarOpen: open });
-  }
- 
-  mediaQueryChanged() {
-    this.setState({ sidebarDocked: mql.matches, sidebarOpen: false });
-  }
- 
+const defaultProps = {};
+
+class Header extends Component {
   render() {
+    const { children, ...attributes } = this.props;
+
     return (
-	<div>
-	 <header class="navbar navbar-light">
-      <button class="navbar-toggler sidebar-toggler" type="button" data-toggle="sidebar-show">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-     </header>
-     
-	  </div>
+      <React.Fragment>
+        <AppSidebarToggler className="d-md-down-none" display="lg" />
+        <Nav className="ml-auto" navbar>
+          <AppHeaderDropdown direction="down">
+            <DropdownToggle nav>
+            <i className="icon-user progress-group-icon"></i>
+            </DropdownToggle>
+            <DropdownMenu right style={{ right: 'auto' }}>
+              <DropdownItem onClick={e => this.props.onLogout(e)}><i className="fa fa-lock"></i> Logout</DropdownItem>
+            </DropdownMenu>
+          </AppHeaderDropdown>
+        </Nav>
+      </React.Fragment>
     );
   }
 }
+
+Header.propTypes = propTypes;
+Header.defaultProps = defaultProps;
 
 export default Header;

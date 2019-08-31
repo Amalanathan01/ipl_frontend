@@ -21,7 +21,7 @@ class Header extends Component {
             <DropdownToggle nav>
             <i className="icon-user progress-group-icon"></i>
             </DropdownToggle>
-            <DropdownMenu right style={{ right: 'auto' }}>
+            <DropdownMenu >
               <DropdownItem onClick={e => this.props.onLogout(e)}><i className="fa fa-lock"></i> Logout</DropdownItem>
             </DropdownMenu>
           </AppHeaderDropdown>

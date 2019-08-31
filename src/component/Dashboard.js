@@ -18,6 +18,7 @@ import routes from '../routes';
 
 const DefaultFooter = React.lazy(() => import('./Footer'));
 const DefaultHeader = React.lazy(() => import('./Header'));
+const Home = React.lazy(() => import('./Home'));
 
 class DashBoard extends Component {
 
@@ -64,12 +65,13 @@ class DashBoard extends Component {
                         )} />
                     ) : (null);
                   })}
-                  <Redirect from="/" to="/dashboard" />
+                  <Redirect from="/dashboard" to="/" />
                 </Switch>
               </Suspense>
             </Container>
           </main>
         </div>
+				
         <AppFooter>
           <Suspense fallback={this.loading()}>
             <DefaultFooter />

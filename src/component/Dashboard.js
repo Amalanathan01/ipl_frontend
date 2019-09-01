@@ -31,15 +31,15 @@ class DashBoard extends Component {
   }
 
   render() {
-    return (
-      <div className="app">
-        <AppHeader fixed>
+      return (
+          <div className="app" style={{ backgroundColor: '#07888B' }}>
+            <AppHeader fixed style={{ backgroundColor: "#141B2F"}}>
           <Suspense  fallback={this.loading()}>
             <DefaultHeader onLogout={e=>this.signOut(e)}/>
           </Suspense>
         </AppHeader>
         <div className="app-body">
-          <AppSidebar>
+            <AppSidebar style={{ backgroundColor: "#141B2F" }}>
             <AppSidebarHeader />
             <AppSidebarForm />
             <Suspense>

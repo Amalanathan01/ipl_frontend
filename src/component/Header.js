@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { DropdownItem, DropdownMenu, DropdownToggle, Nav } from 'reactstrap';
 import PropTypes from 'prop-types';
-import {  AppHeaderDropdown, AppSidebarToggler } from '@coreui/react';
+import { AppHeaderDropdown, AppSidebarToggler, AppNavbarBrand, AppAsideToggler } from '@coreui/react';
+import logo from '../images/IPL-logo.png'
 
 const propTypes = {
   children: PropTypes.node,
@@ -14,18 +15,22 @@ class Header extends Component {
     const { children, ...attributes } = this.props;
 
     return (
-      <React.Fragment>
-        <AppSidebarToggler className="d-md-down-none" display="lg" />
+        <React.Fragment>
+            <AppSidebarToggler className="d-md-down-none" display="lg" />
+        <AppNavbarBrand
+            full={{ src: logo, width: 130, height: 40, alt: 'CoreUI Logo' }}
+            />
+        
         <Nav className="ml-auto" navbar>
           <AppHeaderDropdown direction="down">
             <DropdownToggle nav>
-            <i className="icon-user progress-group-icon"></i>
+            <i className="icon-user" />
             </DropdownToggle>
             <DropdownMenu >
               <DropdownItem onClick={e => this.props.onLogout(e)}><i className="fa fa-lock"></i> Logout</DropdownItem>
             </DropdownMenu>
           </AppHeaderDropdown>
-        </Nav>
+         </Nav>
       </React.Fragment>
     );
   }

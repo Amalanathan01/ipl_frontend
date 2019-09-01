@@ -3,6 +3,7 @@ import APIservices from "../Service";
 import Paginations from "./Pagination";
 import FilterSearch from "./FilterSearch";
 import Matches from "./Matches";
+import { Card } from 'reactstrap';
 
 class Home extends Component {
   state = {
@@ -10,7 +11,7 @@ class Home extends Component {
     filteredMatches: [],
     loading: false,
     currentPage: 1,
-    resultsPerPage: 20
+    resultsPerPage: 10
   };
 
   componentDidMount() {
@@ -33,21 +34,23 @@ class Home extends Component {
     const { initalMatches } = this.state;
     this.setState({
       filteredMatches:
-        year === "All"
-          ? initalMatches
-          : initalMatches.filter(match => match.season === year)
+       year === "All" ? initalMatches : initalMatches.filter(match => match.season === year)
     });
   };
 
   search = text => {
     const { initalMatches, filteredMatches } = this.state;
     this.setState({
-      filteredMatches: initalMatches.filter(
+        filteredMatches: text? filteredMatches ? filteredMatches.filter(
+            item =>
+                item.team1.toLowerCase().includes(text) ||
+                item.team2.toLowerCase().includes(text)
+        ) : initalMatches.filter(
         item =>
           item.team1.toLowerCase().includes(text) ||
-          item.team2.toLowerCase().includes(text)
-      )
-    });
+                    item.team2.toLowerCase().includes(text)
+            ) : initalMatches
+      });
   };
 
   render() {
@@ -64,8 +67,9 @@ class Home extends Component {
       indexOfLastResult
     );
 
-    return (
-      <div className="container mt-5">
+      return (
+          <div className="container mt-5" variant="primary">
+              <Card className="text-white bg-info">
         <FilterSearch
           onYearChange={e => this.filter(e.target.value)}
           onTextChange={text => this.search(text)}
@@ -80,7 +84,8 @@ class Home extends Component {
           totalResults={filteredMatches.length}
           paginate={number => this.setCurrentPage(number)}
           currentPage={currentPage}
-        />
+                  />
+                  </Card>
       </div>
     );
   }

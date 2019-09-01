@@ -10,7 +10,7 @@ const Matches = ({ matches, loading, history }) => {
     );
 
   return (
-    <Table striped bordered hover>
+    <Table striped bordered hover variant="primary">
       <thead>
         <tr>
           <th>#</th>

@@ -34,17 +34,17 @@ class Home extends Component {
     const { initalMatches } = this.state;
     this.setState({
       filteredMatches:
-       year === "All" ? initalMatches : initalMatches.filter(match => match.season === year)
-    });
+       year === "All" ? initalMatches : initalMatches.filter(match => match.season.toString().trim() === year)
+      });
   };
 
-  search = text => {
+    search = text => {
     const { initalMatches, filteredMatches } = this.state;
     this.setState({
         filteredMatches: text? filteredMatches ? filteredMatches.filter(
             item =>
-                item.team1.toLowerCase().includes(text) ||
-                item.team2.toLowerCase().includes(text)
+                item.team1.toLowerCase().includes(text.toLowerCase()) ||
+                item.team2.toLowerCase().includes(text.toLowerCase())
         ) : initalMatches.filter(
         item =>
           item.team1.toLowerCase().includes(text) ||

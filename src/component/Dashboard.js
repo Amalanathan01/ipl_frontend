@@ -18,7 +18,6 @@ import routes from '../routes';
 
 const DefaultFooter = React.lazy(() => import('./Footer'));
 const DefaultHeader = React.lazy(() => import('./Header'));
-const Home = React.lazy(() => import('./Home'));
 
 class DashBoard extends Component {
 

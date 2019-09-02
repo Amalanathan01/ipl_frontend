@@ -6,10 +6,10 @@ const headers = {
 
 class APIServices {
   getAllMatches = () => {
-    return axios.get("./Matches.json", { headers });
+      return axios.get("http://localhost:8001/matches", { headers });
   };
-  getMatchDetails = () => {
-    return axios.get("./Matches.json", { headers });
+  getMatchDetails = (id) => {
+      return axios.get(`http://localhost:8001/delivery/${id}`, { headers });
   };
 }
 

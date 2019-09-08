@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import APIServices from "../Service";
-import routes from '../routes';
 import { Spinner, Table } from "react-bootstrap";
 import { Scrollbars } from 'react-custom-scrollbars';
 import Paginations from "./Pagination";

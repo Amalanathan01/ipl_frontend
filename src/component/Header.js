@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { DropdownItem, DropdownMenu, DropdownToggle, Nav } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { AppHeaderDropdown, AppSidebarToggler, AppNavbarBrand, AppAsideToggler } from '@coreui/react';
+import { AppHeaderDropdown, AppSidebarToggler, AppNavbarBrand } from '@coreui/react';
 import logo from '../images/IPL-logo.png'
 
 const propTypes = {
@@ -12,7 +12,7 @@ const defaultProps = {};
 
 class Header extends Component {
   render() {
-    const { children, ...attributes } = this.props;
+    //const { children, ...attributes } = this.props;
 
     return (
         <React.Fragment>

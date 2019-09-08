@@ -16,12 +16,13 @@ class Home extends Component {
 
   componentDidMount() {
     APIservices.getAllMatches()
-      .then(res =>
-        this.setState({
-          initalMatches: res.data,
-          filteredMatches: res.data,
-          loading: true
-        })
+        .then(res => {
+            this.setState({
+                initalMatches: res.data.data.matches,
+                filteredMatches: res.data.data.matches,
+                loading: true
+            })
+        }
       )
       .catch(err => console.log(err));
   }
@@ -61,8 +62,8 @@ class Home extends Component {
       resultsPerPage
     } = this.state;
     const indexOfLastResult = currentPage * resultsPerPage;
-    const indexOfFirstResult = indexOfLastResult - resultsPerPage;
-    const currentMatches = filteredMatches.slice(
+      const indexOfFirstResult = indexOfLastResult - resultsPerPage;
+      const currentMatches = filteredMatches.slice(
       indexOfFirstResult,
       indexOfLastResult
     );

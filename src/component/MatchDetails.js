@@ -85,7 +85,7 @@ class MatchDetails extends Component {
                         <td>{delivery.ball}</td>
                         <td>{delivery.batsman}</td>
                         <td>{delivery.bowler}</td>
-                        <td>{delivery.is_super_over}</td>
+                        <td>{delivery.is_super_over? "Yes" : "No"}</td>
                         <td>{delivery.wide_runs}</td>
                         <td>{delivery.bye_runs}</td>
                         <td>{delivery.legbye_runs}</td>

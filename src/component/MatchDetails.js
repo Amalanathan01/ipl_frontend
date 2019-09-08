@@ -3,7 +3,7 @@ import APIServices from "../Service";
 import { Spinner, Table } from "react-bootstrap";
 import { Scrollbars } from 'react-custom-scrollbars';
 import Paginations from "./Pagination";
-import { Card } from 'reactstrap';
+import { Card, CardTitle, CardBody } from 'reactstrap';
 
 class MatchDetails extends Component {
   state = {
@@ -40,6 +40,8 @@ class MatchDetails extends Component {
             indexOfFirstResult,
             indexOfLastResult
         );
+        const teams = currentDeliveries[0] ? (currentDeliveries[0].batting_team + ' vs ' +
+            currentDeliveries[0].bowling_team) : '';
 
         if (!loading)
             return (
@@ -49,7 +51,9 @@ class MatchDetails extends Component {
         );
         return (
             <Card className="text-white bg-info">
-            <Scrollbars style={{ width: 1200, height: 1000 }}>
+            <CardBody>
+            <CardTitle><h1 style={{ color: "#1303fc" }}>{teams}</h1></CardTitle>
+            <Scrollbars autoHeight autoHeightMin="100%" autoHeightMax="100%">
             
             <Table striped bordered hover variant="primary">
             <thead>
@@ -107,7 +111,8 @@ class MatchDetails extends Component {
                 totalResults={filteredDeliveries.length}
                 paginate={number => this.setCurrentPage(number)}
                 currentPage={currentPage}
-            />
+                    />
+             </CardBody>
             </Card>
 );
   }

@@ -16,12 +16,13 @@ class Home extends Component {
 
   componentDidMount() {
     APIservices.getAllMatches()
-      .then(res =>
-        this.setState({
-          initalMatches: res.data,
-          filteredMatches: res.data,
-          loading: true
-        })
+        .then(res => {
+            this.setState({
+                initalMatches: res.data.data.matches,
+                filteredMatches: res.data.data.matches,
+                loading: true
+            })
+        }
       )
       .catch(err => console.log(err));
   }
@@ -34,17 +35,17 @@ class Home extends Component {
     const { initalMatches } = this.state;
     this.setState({
       filteredMatches:
-       year === "All" ? initalMatches : initalMatches.filter(match => match.season === year)
-    });
+       year === "All" ? initalMatches : initalMatches.filter(match => match.season.toString().trim() === year)
+      });
   };
 
-  search = text => {
+    search = text => {
     const { initalMatches, filteredMatches } = this.state;
     this.setState({
         filteredMatches: text? filteredMatches ? filteredMatches.filter(
             item =>
-                item.team1.toLowerCase().includes(text) ||
-                item.team2.toLowerCase().includes(text)
+                item.team1.toLowerCase().includes(text.toLowerCase()) ||
+                item.team2.toLowerCase().includes(text.toLowerCase())
         ) : initalMatches.filter(
         item =>
           item.team1.toLowerCase().includes(text) ||
@@ -61,8 +62,8 @@ class Home extends Component {
       resultsPerPage
     } = this.state;
     const indexOfLastResult = currentPage * resultsPerPage;
-    const indexOfFirstResult = indexOfLastResult - resultsPerPage;
-    const currentMatches = filteredMatches.slice(
+      const indexOfFirstResult = indexOfLastResult - resultsPerPage;
+      const currentMatches = filteredMatches.slice(
       indexOfFirstResult,
       indexOfLastResult
     );

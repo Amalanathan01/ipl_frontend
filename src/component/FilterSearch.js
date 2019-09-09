@@ -21,7 +21,7 @@ class FilterSearch extends Component {
   };
   render() {
     const { years, searchText } = this.state;
-    const { onYearChange, onTextChange } = this.props;
+    const { onYearChange } = this.props;
     return (
       <div className="mt-5">
         <select

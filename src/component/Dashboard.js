@@ -15,27 +15,61 @@ import {
 } from '@coreui/react';
 import navigation from '../_nav';
 import routes from '../routes';
+const jwt = require('jsonwebtoken');
 
 const DefaultFooter = React.lazy(() => import('./Footer'));
 const DefaultHeader = React.lazy(() => import('./Header'));
 
 class DashBoard extends Component {
 
-  loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
+    loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
 
-  signOut(e) {
+    state = {
+        isAdmin: false,
+        decodedToken: jwt.decode(sessionStorage.getItem("token")),
+        addedNavigation : false
+    };
+
+    signOut(e) {
+      console.log(e)
     e.preventDefault()
     sessionStorage.clear()
-    this.props.history.push('/')
-  }
+    this.props.history.push('/login')
+    }
 
-  render() {
+    componentDidMount() {
+        const dateNow = new Date();
+        if (this.state.decodedToken
+            && this.state.decodedToken.exp >= (dateNow.getTime() / 1000)
+            && this.state.decodedToken.data.role === 'admin') {
+            this.setState({
+                isAdmin: true
+            })
+        }
+    }
+
+    render() {
+        if (this.state.isAdmin && !this.state.addedNavigation) {
+            this.setState({
+                addedNavigation : true
+            })
+        navigation.items.push({
+            name: 'Manage Score',
+            url: '/managescore',
+            icon: 'icon-puzzle'
+        });
+        navigation.items.push({
+            name: 'Batsman Teams',
+            url: '/manageteams',
+            icon: 'icon-puzzle'
+        })
+        }
       return (
           <div className="app" style={{ backgroundColor: '#07888B' }}>
             <AppHeader fixed style={{ backgroundColor: "#141B2F"}}>
-          <Suspense  fallback={this.loading()}>
+         // <Suspense  fallback={this.loading()}>
             <DefaultHeader onLogout={e=>this.signOut(e)}/>
-          </Suspense>
+          //</Suspense>
         </AppHeader>
         <div className="app-body">
             <AppSidebar style={{ backgroundColor: "#141B2F" }}>

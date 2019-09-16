@@ -3,6 +3,7 @@ import { DropdownItem, DropdownMenu, DropdownToggle, Nav } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { AppHeaderDropdown, AppSidebarToggler, AppNavbarBrand } from '@coreui/react';
 import logo from '../images/IPL-logo.png'
+const jwt = require('jsonwebtoken');
 
 const propTypes = {
   children: PropTypes.node,
@@ -11,8 +12,8 @@ const propTypes = {
 const defaultProps = {};
 
 class Header extends Component {
+
   render() {
-    //const { children, ...attributes } = this.props;
 
     return (
         <React.Fragment>
@@ -26,8 +27,10 @@ class Header extends Component {
             <DropdownToggle nav>
             <i className="icon-user" />
             </DropdownToggle>
-            <DropdownMenu >
-              <DropdownItem onClick={e => this.props.onLogout(e)}><i className="fa fa-lock"></i> Logout</DropdownItem>
+                    <DropdownMenu >
+                        {
+                           <DropdownItem onClick={e => this.props.onLogout(e)}><i>Logout</i></DropdownItem>
+                        }
             </DropdownMenu>
           </AppHeaderDropdown>
          </Nav>

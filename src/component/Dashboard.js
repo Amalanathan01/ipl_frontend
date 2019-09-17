@@ -65,11 +65,11 @@ class DashBoard extends Component {
         })
         }
       return (
-          <div className="app" style={{ backgroundColor: '#07888B' }}>
+          <div className="app">
             <AppHeader fixed style={{ backgroundColor: "#141B2F"}}>
-         // <Suspense  fallback={this.loading()}>
+          <Suspense  fallback={this.loading()}>
             <DefaultHeader onLogout={e=>this.signOut(e)}/>
-          //</Suspense>
+         </Suspense>
         </AppHeader>
         <div className="app-body">
             <AppSidebar style={{ backgroundColor: "#141B2F" }}>
